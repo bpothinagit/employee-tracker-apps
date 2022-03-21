@@ -1,5 +1,6 @@
 package com.employeetracker.model;
 
+import com.employeetracker.exception.EmployeeStatusException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,14 +18,14 @@ public class ManagerialEmployee extends Employee {
         if(vacationDaysRequested <= getVacationDays() - getVacationDaysRequested()) {
             setVacationDaysRequested(vacationDaysRequested);
         } else {
-            throw new RuntimeException("No more vacation Days Left.");
+            throw new EmployeeStatusException("No more vacation Days Left.");
         }
     }
 
     private void updateVacationDays() {
         float vacationDays = (float)(getDaysWorked() * MAX_VACATION_DAYS) / 260;
         if(vacationDays > MAX_VACATION_DAYS) {
-            throw  new RuntimeException("Reached max vacation accrual limit.");
+            throw  new EmployeeStatusException("Reached maximum vacation days accrual limit.");
         }
         setVacationDays(vacationDays);
     }

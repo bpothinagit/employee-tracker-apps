@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { EmployeeDataService } from './employee-data.service';
 
 // TODO: Replace this with your own data model type
 export interface EmployeeTableItem {
@@ -13,7 +14,10 @@ export interface EmployeeTableItem {
 }
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: EmployeeTableItem[] = [];
+ //EmployeeTableItem[] = 
+
+
+// [];this.http.get("http://localhost:8080/employee/getAll");
 
 /**
  * Data source for the EmployeeTable view. This class should
@@ -28,6 +32,12 @@ export class EmployeeTableDataSource extends DataSource<EmployeeTableItem> {
   constructor() {
     super();
   }
+
+  constructor(private http:HttpClient) { }
+    
+    public getEmployees() {
+      this.http.get("http://localhost:8080/employee/getAll");
+    }
 
   /**
    * Connect this data source to the table. The table will only update when

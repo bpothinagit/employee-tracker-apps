@@ -2,14 +2,15 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { EmployeeRecord } from 'src/employeeRecord';
 import { EmployeeDataService } from './employee-data.service';
-import { EmployeeTableDataSource } from './employee-table-datasource';
+import { EmployeeTableDataSource, EmployeeTableItem } from './employee-table-datasource';
 
 // TODO: Replace this with your own data model type
 // export interface EmployeeTableItem {
-//   name: string;
-//   id: number;
+//     id: number;
+//     daysWorked: number;
+//     vacationDaysRequested: number;
+//     vacationDays: number;
 // }
 
 @Component({
@@ -17,7 +18,7 @@ import { EmployeeTableDataSource } from './employee-table-datasource';
   templateUrl: './employee-table.component.html',
   styleUrls: ['./employee-table.component.css']
 })
-export class EmployeeTableComponent implements OnInit {
+export class EmployeeTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<EmployeeTableItem>;
@@ -25,12 +26,13 @@ export class EmployeeTableComponent implements OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  ELEMENT_DATA : EmployeeRecord[];
+  ELEMENT_DATA! : EmployeeTableItem[];
   displayedColumns: string[] = ['id', 'daysWorked', 'vacationDaysRequested', 'vacationDays'];
 
   constructor(private service:EmployeeDataService) {
     this.dataSource = new EmployeeTableDataSource();
   }
+
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
