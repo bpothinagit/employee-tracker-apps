@@ -1,0 +1,38 @@
+<div class="mat-elevation-z8" app-employee-table>
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <!-- Days Worked Column -->
+    <ng-container matColumnDef="daysWorked">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Days Worked</th>
+      <td mat-cell *matCellDef="let row">{{row.daysWorked}}</td>
+    </ng-container>
+
+     <!-- Days Worked Column -->
+     <ng-container matColumnDef="vacationDaysRequested">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vacation Days Requested</th>
+      <td mat-cell *matCellDef="let row">{{row.vacationDaysRequested}}</td>
+    </ng-container>
+
+     <!-- Days Worked Column -->
+     <ng-container matColumnDef="vacationDays">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Vacation Days Accrued</th>
+      <td mat-cell *matCellDef="let row">{{row.vacationDays}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>
